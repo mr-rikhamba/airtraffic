@@ -1,0 +1,16 @@
+C:\Projects\Technovate\Airtraffic\AirTraffic.Mobile\AirTraffic.Mobile\AirTraffic.Mobile\bin\Debug\netstandard2.0\AirTraffic.Mobile.deps.json
+C:\Projects\Technovate\Airtraffic\AirTraffic.Mobile\AirTraffic.Mobile\AirTraffic.Mobile\bin\Debug\netstandard2.0\AirTraffic.Mobile.dll
+C:\Projects\Technovate\Airtraffic\AirTraffic.Mobile\AirTraffic.Mobile\AirTraffic.Mobile\obj\Debug\netstandard2.0\AirTraffic.Mobile.csprojAssemblyReference.cache
+C:\Projects\Technovate\Airtraffic\AirTraffic.Mobile\AirTraffic.Mobile\AirTraffic.Mobile\obj\Debug\netstandard2.0\App.xaml.g.cs
+C:\Projects\Technovate\Airtraffic\AirTraffic.Mobile\AirTraffic.Mobile\AirTraffic.Mobile\obj\Debug\netstandard2.0\Views\AboutPage.xaml.g.cs
+C:\Projects\Technovate\Airtraffic\AirTraffic.Mobile\AirTraffic.Mobile\AirTraffic.Mobile\obj\Debug\netstandard2.0\Views\ItemDetailPage.xaml.g.cs
+C:\Projects\Technovate\Airtraffic\AirTraffic.Mobile\AirTraffic.Mobile\AirTraffic.Mobile\obj\Debug\netstandard2.0\Views\ItemsPage.xaml.g.cs
+C:\Projects\Technovate\Airtraffic\AirTraffic.Mobile\AirTraffic.Mobile\AirTraffic.Mobile\obj\Debug\netstandard2.0\Views\MainPage.xaml.g.cs
+C:\Projects\Technovate\Airtraffic\AirTraffic.Mobile\AirTraffic.Mobile\AirTraffic.Mobile\obj\Debug\netstandard2.0\Views\NewItemPage.xaml.g.cs
+C:\Projects\Technovate\Airtraffic\AirTraffic.Mobile\AirTraffic.Mobile\AirTraffic.Mobile\obj\Debug\netstandard2.0\AirTraffic.Mobile.csproj.CoreCompileInputs.cache
+C:\Projects\Technovate\Airtraffic\AirTraffic.Mobile\AirTraffic.Mobile\AirTraffic.Mobile\obj\Debug\netstandard2.0\AirTraffic.Mobile.AssemblyInfoInputs.cache
+C:\Projects\Technovate\Airtraffic\AirTraffic.Mobile\AirTraffic.Mobile\AirTraffic.Mobile\obj\Debug\netstandard2.0\AirTraffic.Mobile.AssemblyInfo.cs
+C:\Projects\Technovate\Airtraffic\AirTraffic.Mobile\AirTraffic.Mobile\AirTraffic.Mobile\bin\Debug\netstandard2.0\AirTraffic.Mobile.pdb
+C:\Projects\Technovate\Airtraffic\AirTraffic.Mobile\AirTraffic.Mobile\AirTraffic.Mobile\obj\Debug\netstandard2.0\XamlC.stamp
+C:\Projects\Technovate\Airtraffic\AirTraffic.Mobile\AirTraffic.Mobile\AirTraffic.Mobile\obj\Debug\netstandard2.0\AirTraffic.Mobile.dll
+C:\Projects\Technovate\Airtraffic\AirTraffic.Mobile\AirTraffic.Mobile\AirTraffic.Mobile\obj\Debug\netstandard2.0\AirTraffic.Mobile.pdb

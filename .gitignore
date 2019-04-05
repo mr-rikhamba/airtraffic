@@ -3,3 +3,8 @@
 ################################################################################
 
 /AirTraffic.Mobile/AirTraffic.Mobile/AirTraffic.Mobile/bin/Debug/netstandard2.0
+/AirTraffic.Mobile/.vs/AirTraffic.Mobile/v15/Server/sqlite3
+/AirTraffic.Mobile/AirTraffic.Mobile/AirTraffic.Mobile.Android/bin/Debug
+/AirTraffic.Mobile/AirTraffic.Mobile/AirTraffic.Mobile.Android/obj
+/AirTraffic.Mobile/AirTraffic.Mobile/AirTraffic.Mobile.iOS/bin/iPhoneSimulator/Debug
+/AirTraffic.Mobile/AirTraffic.Mobile/AirTraffic.Mobile.iOS/obj
