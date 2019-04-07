@@ -8,6 +8,7 @@ using Android.Widget;
 using Android.OS;
 using Xamarin.Forms.GoogleMaps.Android;
 using Xamarin.Forms;
+using Acr.UserDialogs;
 
 namespace AirTraffic.Mobile.Droid
 {
@@ -23,7 +24,7 @@ namespace AirTraffic.Mobile.Droid
             Forms.SetFlags("CollectionView_Experimental");
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
-
+            UserDialogs.Init(() => this);
             var platformConfig = new PlatformConfig
             {
                 //   BitmapDescriptorFactory = new CachingNativeBitmapDescriptorFactory()

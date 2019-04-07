@@ -15,6 +15,8 @@
         public string codeIso2Country { get; set; }
         public string codeIataCity { get; set; }
         public string distance { get; set; }
+
+        public string Tel { get { return phone ?? "No Phone Number"; } }
     }
 
 }

@@ -15,8 +15,7 @@ namespace AirTraffic.Mobile
         public App()
         {
             InitializeComponent();
-
-            MainPage = new MapPage();
+            
             (Application.Current as App).NavigationPage = new NavigationPage(new MapPage());
             Application.Current.MainPage = NavigationPage;
         }

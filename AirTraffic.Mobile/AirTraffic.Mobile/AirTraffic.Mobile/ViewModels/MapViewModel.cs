@@ -1,4 +1,5 @@
-﻿using AirTraffic.Mobile.Helpers;
+﻿using Acr.UserDialogs;
+using AirTraffic.Mobile.Helpers;
 using AirTraffic.Mobile.Models;
 using AirTraffic.Mobile.Views;
 using System;
@@ -33,6 +34,7 @@ namespace AirTraffic.Mobile.ViewModels
         #endregion
 
         #region Commands
+        public ICommand GetAirportsCommand { get; }
         public ICommand GetTimeTableCommand { get; }
         public ICommand ClowWindowCommand { get; }
         public ICommand ViewFlightsCommand { get; }
@@ -46,23 +48,37 @@ namespace AirTraffic.Mobile.ViewModels
             Title = "Airports";
             Timetables = new ObservableCollection<TimetableModel>();
             Airports = new ObservableCollection<AirportModel>();
-            Device.BeginInvokeOnMainThread(async () =>
+
+            GetAirportsCommand = new Command(async () =>
             {
-
-                var request = new GeolocationRequest(GeolocationAccuracy.Low);
-                request.Timeout = TimeSpan.FromSeconds(10);
-                var location = await Geolocation.GetLocationAsync(request);
-                if (location != null)
+            Device.BeginInvokeOnMainThread(async () =>{
+                try
                 {
-                    Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
-                    MessagingCenter.Send<string, Position>("MapUpdate", "MoveTo", new Position(location.Latitude, location.Longitude));
-                    Position = new Position(location.Latitude, location.Longitude);
-                    var airports = await FlightService.GetNearByAirport(Position.Latitude, Position.Longitude);
-                    airports.ForEach(item => Airports.Add(item));
-                    MessagingCenter.Send<string, List<AirportModel>>("MapUpdate", "PushPins", airports);
+                    if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+                    {
+                        UserDialogs.Instance.Toast("Limited or no network detected. Application may not run as intended.", TimeSpan.FromSeconds(10));
+                        return;
+                    }
+                    var request = new GeolocationRequest(GeolocationAccuracy.Low);
+                    request.Timeout = TimeSpan.FromSeconds(30);
+                    var location = await Geolocation.GetLocationAsync(request);
+                    if (location != null)
+                    {
+                        Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
+                        MessagingCenter.Send<string, Position>("MapUpdate", "MoveTo", new Position(location.Latitude, location.Longitude));
+                        Position = new Position(location.Latitude, location.Longitude);
+                        var airports = await FlightService.GetNearByAirport(Position.Latitude, Position.Longitude);
+                        airports.ForEach(item => Airports.Add(item));
+                        MessagingCenter.Send<string, List<AirportModel>>("MapUpdate", "PushPins", airports);
 
+                    }
                 }
+                catch (Exception ex)
+                {
 
+                    UserDialogs.Instance.Alert(ex.Message, "Error");
+                }
+            });
 
             });
             GetTimeTableCommand = new Command<AirportModel>(async (airportModel) =>

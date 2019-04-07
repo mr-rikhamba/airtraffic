@@ -3,8 +3,6 @@ using AirTraffic.Mobile.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
@@ -21,8 +19,9 @@ namespace AirTraffic.Mobile.Views
             InitializeComponent();
             MapViewModel = (MapViewModel)BindingContext;
 
-            MessagingCenter.Subscribe<string, Position>("MapUpdate", "MoveTo", (sender, pos) => {
-           
+            MessagingCenter.Subscribe<string, Position>("MapUpdate", "MoveTo", (sender, pos) =>
+            {
+                map.Pins.Clear();
                 var pin = new Pin()
                 {
                     Type = PinType.Place,
@@ -37,7 +36,8 @@ namespace AirTraffic.Mobile.Views
             });
 
 
-            MessagingCenter.Subscribe<string, List<AirportModel>>("MapUpdate", "PushPins", (sender, pins) => {
+            MessagingCenter.Subscribe<string, List<AirportModel>>("MapUpdate", "PushPins", (sender, pins) =>
+            {
 
                 pins.ForEach((pinModel) =>
                 {
@@ -57,7 +57,7 @@ namespace AirTraffic.Mobile.Views
                         };
                         map.Pins.Add(pin);
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         throw;
                     }
@@ -67,15 +67,25 @@ namespace AirTraffic.Mobile.Views
             map.PinClicked += Map_PinClicked;
         }
 
-
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            MapViewModel.GetAirportsCommand.Execute(null);
+        }
         private void Map_PinClicked(object sender, PinClickedEventArgs e)
         {
-            if (e.Pin.Tag == typeof(string))
+            if (e.Pin.Tag == "current_location")
             {
+                MapViewModel.SelectedPin = null;
+                MapViewModel.ShowInfoWindow = false;
                 return;
             }
             MapViewModel.SelectedPin = MapViewModel.Airports.FirstOrDefault(c => c.codeIataAirport == (string)e.Pin.Tag);
             MapViewModel.ShowInfoWindow = true;
+        }
+        private void MenuItem1_Clicked(object sender, EventArgs e)
+        {
+            MapViewModel.GetAirportsCommand.Execute(null);
         }
     }
 }

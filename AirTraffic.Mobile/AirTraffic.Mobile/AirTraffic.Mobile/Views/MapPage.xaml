@@ -3,10 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
              xmlns:vm="clr-namespace:AirTraffic.Mobile.ViewModels"
-             x:Class="AirTraffic.Mobile.Views.MapPage">
+             x:Class="AirTraffic.Mobile.Views.MapPage"
+             Title="Nearby Airports">
     <ContentPage.BindingContext>
         <vm:MapViewModel />
     </ContentPage.BindingContext>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="MenuItem1_Clicked" Name="MenuItem1" Order="Primary" Text="Refresh" Priority="0" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <RelativeLayout>
             <Grid RowSpacing="0" ColumnSpacing="0" BackgroundColor="Red" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"        
@@ -84,7 +88,7 @@
                             <Label>
                                 <Label.FormattedText>
                                     <FormattedString>
-                                        <Span Text="{Binding SelectedPin.phone}"></Span>
+                                        <Span Text="{Binding SelectedPin.Tel}"></Span>
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>

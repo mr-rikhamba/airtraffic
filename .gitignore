@@ -8,3 +8,6 @@
 /AirTraffic.Mobile/AirTraffic.Mobile/AirTraffic.Mobile.Android/obj
 /AirTraffic.Mobile/AirTraffic.Mobile/AirTraffic.Mobile.iOS/bin/iPhoneSimulator/Debug
 /AirTraffic.Mobile/AirTraffic.Mobile/AirTraffic.Mobile.iOS/obj
+/AirTraffic.Mobile/AirTraffic.Mobile/AirTraffic.Mobile/obj/Debug/netstandard2.0/Views/MapPage.xaml.g.cs
+/AirTraffic.Mobile/AirTraffic.Mobile/AirTraffic.Mobile/obj/Debug/netstandard2.0/Views/TimetablePage.xaml.g.cs
+/AirTraffic.Mobile/AirTraffic.Mobile/AirTraffic.Mobile/bin/Release/netstandard2.0

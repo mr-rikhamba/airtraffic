@@ -1,6 +1,8 @@
-﻿using AirTraffic.Mobile.Helpers;
+﻿using Acr.UserDialogs;
+using AirTraffic.Mobile.Helpers;
 using AirTraffic.Mobile.Models;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -32,6 +34,11 @@ namespace AirTraffic.Mobile.Services
         {
             try
             {
+                if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+                {
+                    UserDialogs.Instance.Toast("Limited or no network detected. Application may not run as intended.", TimeSpan.FromSeconds(10));
+                    return null;
+                }
                 var assembly = IntrospectionExtensions.GetTypeInfo(typeof(LoadResourceText)).Assembly;
                 Stream stream = assembly.GetManifestResourceStream($"AirTraffic.Mobile.MockData.{fileName}");
 
