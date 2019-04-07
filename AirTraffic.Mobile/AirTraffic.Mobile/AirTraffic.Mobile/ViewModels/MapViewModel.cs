@@ -31,6 +31,8 @@ namespace AirTraffic.Mobile.ViewModels
         }
         public ObservableCollection<TimetableModel> Timetables { get; set; }
         public ObservableCollection<AirportModel> Airports { get; set; }
+
+        public Position Position { get; set; }
         #endregion
 
         #region Commands
@@ -40,8 +42,6 @@ namespace AirTraffic.Mobile.ViewModels
         public ICommand ViewFlightsCommand { get; }
         #endregion
 
-        public Position Position { get; set; }
-        public static object FeedItems { get; internal set; }
 
         public MapViewModel()
         {
@@ -51,41 +51,45 @@ namespace AirTraffic.Mobile.ViewModels
 
             GetAirportsCommand = new Command(async () =>
             {
-            Device.BeginInvokeOnMainThread(async () =>{
-                try
+                //Use Device.BeginInvokeOnMainThread because operations within are async and we need to send messages using MessagingCenter and as well as get a current location
+                Device.BeginInvokeOnMainThread(async () =>
                 {
-                    if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+                    try
                     {
-                        UserDialogs.Instance.Toast("Limited or no network detected. Application may not run as intended.", TimeSpan.FromSeconds(10));
-                        return;
+                        //Determine network status
+                        if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+                        {
+                            UserDialogs.Instance.Toast("Limited or no network detected. Application may not run as intended.", TimeSpan.FromSeconds(10));
+                            return;
+                        }
+                        var request = new GeolocationRequest(GeolocationAccuracy.Low);
+                        request.Timeout = TimeSpan.FromSeconds(30);
+                        var location = await Geolocation.GetLocationAsync(request);
+                        if (location != null)
+                        {
+                            Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
+                            MessagingCenter.Send<string, Position>("MapUpdate", "MoveTo", new Position(location.Latitude, location.Longitude));
+                            Position = new Position(location.Latitude, location.Longitude);
+                            var airports = await FlightService.GetNearByAirport(Position.Latitude, Position.Longitude);
+                            airports.ForEach(item => Airports.Add(item));
+                            MessagingCenter.Send<string, List<AirportModel>>("MapUpdate", "PushPins", airports);
+
+                        }
                     }
-                    var request = new GeolocationRequest(GeolocationAccuracy.Low);
-                    request.Timeout = TimeSpan.FromSeconds(30);
-                    var location = await Geolocation.GetLocationAsync(request);
-                    if (location != null)
+                    catch (Exception ex)
                     {
-                        Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
-                        MessagingCenter.Send<string, Position>("MapUpdate", "MoveTo", new Position(location.Latitude, location.Longitude));
-                        Position = new Position(location.Latitude, location.Longitude);
-                        var airports = await FlightService.GetNearByAirport(Position.Latitude, Position.Longitude);
-                        airports.ForEach(item => Airports.Add(item));
-                        MessagingCenter.Send<string, List<AirportModel>>("MapUpdate", "PushPins", airports);
-
+                        //Handle any unhandled errors here
+                        UserDialogs.Instance.Alert(ex.Message, "Error");
                     }
-                }
-                catch (Exception ex)
-                {
-
-                    UserDialogs.Instance.Alert(ex.Message, "Error");
-                }
-            });
+                });
 
             });
+            #region Command implementations
             GetTimeTableCommand = new Command<AirportModel>(async (airportModel) =>
-            {
-                var timetables = await FlightService.GetAirportFlights(airportModel.codeIataAirport, Constants.FlightTypeDeparture);
-                timetables.ForEach(item => Timetables.Add(item));
-            });
+          {
+              var timetables = await FlightService.GetAirportFlights(airportModel.codeIataAirport, Constants.FlightTypeDeparture);
+              timetables.ForEach(item => Timetables.Add(item));
+          });
             ClowWindowCommand = new Command(() =>
             {
                 ShowInfoWindow = false;
@@ -95,6 +99,7 @@ namespace AirTraffic.Mobile.ViewModels
                 App.CurrentAirport = SelectedPin;
                 await (Application.Current as App).NavigationPage.PushAsync(new TimetablePage());
             });
+            #endregion
         }
 
     }

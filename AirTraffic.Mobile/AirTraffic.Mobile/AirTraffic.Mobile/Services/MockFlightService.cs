@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace AirTraffic.Mobile.Services
 {
+    /// <summary>
+    /// A mock implementation of IFlightService which fetches data from a json file
+    /// </summary>
     public class MockFlightService : IFlightService
     {
         public async Task<List<TimetableModel>> GetAirportFlights(string iataCode, string flightType)
@@ -30,6 +33,12 @@ namespace AirTraffic.Mobile.Services
             return response;
         }
 
+        /// <summary>
+        /// Reads data from a local text or json file and deserializes to a given type
+        /// </summary>
+        /// <typeparam name="T">Type required to deserialize</typeparam>
+        /// <param name="fileName">Name of the file where required mock data is stored.</param>
+        /// <returns></returns>
         private async Task<List<T>> ReadJsonFile<T>(string fileName)
         {
             try

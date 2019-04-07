@@ -43,6 +43,7 @@ namespace AirTraffic.Mobile.ViewModels
             Timetables = new ObservableCollection<TimetableModel>();
             Airports = new ObservableCollection<AirportModel>();
             Cities = new ObservableCollection<CityModel>();
+            #region Command implementations
 
             ToggleFlightTypeCommand = new Command(async () =>
             {
@@ -56,9 +57,13 @@ namespace AirTraffic.Mobile.ViewModels
             {
                 await GetCities();
             });
+            #endregion
+            #region Manual Executions of commands in order to initialize cities and timetables based on current airport.
             RefreshCitiesCommand.Execute(null);
-            RefreshTimetableCommand.Execute(null);
+            RefreshTimetableCommand.Execute(null); 
+            #endregion
         }
+        #region Internal actions
 
         private async Task GetCities()
         {
@@ -74,7 +79,8 @@ namespace AirTraffic.Mobile.ViewModels
                 item.departure.City = Cities.FirstOrDefault(c => c.codeIataCity == item.departure.iataCode)?.nameCity ?? "City not found";
                 Timetables.Add(item);
             });
-        }
+        } 
+        #endregion
 
     }
 }
