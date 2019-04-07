@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="29px" height="38px" viewBox="0 0 29 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53 (72520) - https://sketchapp.com -->
+    <title>Group 4</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Android" transform="translate(-158.000000, -227.000000)" fill-rule="nonzero">
+            <g id="Group-4" transform="translate(158.409701, 228.000000)">
+                <path d="M13.590299,36.0719399 C14.2977131,36.0719399 14.2977131,34.1385455 15.9321269,30.8247168 C17.5665407,27.5108882 27.590299,21.7802037 27.590299,14 C27.590299,6.2680135 21.3222855,0 13.590299,0 C5.85831253,0 3.49987507e-16,6.26802278 0,14 C-3.70926931e-16,21.7319772 8.29765379,25.9801149 11.2732868,30.8247168 C12.4322312,32.711584 12.8828849,36.0719399 13.590299,36.0719399 Z" id="Oval" stroke="#FFFFFF" stroke-width="0.5" fill="#DB4437"></path>
+                <circle id="Oval" fill="#000000" opacity="0.300000012" cx="13.590299" cy="13" r="5"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

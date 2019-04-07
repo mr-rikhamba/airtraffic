@@ -13,6 +13,7 @@ namespace AirTraffic.Mobile.ViewModels
     public class BaseViewModel : INotifyPropertyChanged
     {
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>() ?? new MockDataStore();
+        public IFlightService FlightService => new FlightService();//new MockFlightService();
 
         bool isBusy = false;
         public bool IsBusy

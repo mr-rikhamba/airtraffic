@@ -6,6 +6,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Xamarin.Forms.GoogleMaps.Android;
+using Xamarin.Forms;
 
 namespace AirTraffic.Mobile.Droid
 {
@@ -18,8 +20,28 @@ namespace AirTraffic.Mobile.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
+            Forms.SetFlags("CollectionView_Experimental");
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
+
+            var platformConfig = new PlatformConfig
+            {
+                //   BitmapDescriptorFactory = new CachingNativeBitmapDescriptorFactory()
+            };
+            Xamarin.FormsGoogleMaps.Init(this, savedInstanceState, platformConfig); // initialize for Xamarin.Forms.GoogleMaps
             LoadApplication(new App());
+        }
+    }
+
+    [Application]
+    [MetaData("com.google.android.maps.v2.API_KEY",
+            Value = "AIzaSyB8CWuTXCULfV6Jx1UsA6CdAqZWjmzTzhE")]
+    public class MyApp : Android.App.Application
+    {
+        public MyApp(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+            Xamarin.Essentials.Platform.Init(this);
         }
     }
 }

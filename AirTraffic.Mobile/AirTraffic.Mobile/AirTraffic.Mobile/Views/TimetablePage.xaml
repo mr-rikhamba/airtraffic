@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:AirTraffic.Mobile.ViewModels"
+             x:Class="AirTraffic.Mobile.Views.TimetablePage">
+    <ContentPage.BindingContext>
+        <vm:TimetableViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid BackgroundColor="Brown" HeightRequest="200">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Image Grid.Row="0" Grid.RowSpan="2" Source="Img_x1.png"  Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+
+                <StackLayout Grid.Row="1" Padding="20,0,20,0">
+                    <Label TextColor="White" FontSize="Large" Text="{Binding CurrentAirport.nameAirport}"></Label>
+
+                    <Label TextColor="White">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding CurrentAirport.codeIataCity}"></Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </StackLayout>
+            </Grid>
+            <ListView ItemsSource="{Binding Timetables}" RowHeight="100" CachingStrategy="RecycleElementAndDataTemplate">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image Grid.Column="0" Source="Plane.png"/>
+                                    <Label FontSize="Medium" FontAttributes="Bold" Grid.Column="1"  TextColor="Navy" Text="{Binding airline.name}"/>
+                                    <Image Grid.Column="2" Source="{Binding StatusImage}"/>
+                                    <Label Grid.Column="3" Text="{Binding status}"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Row="0" Grid.Column="0" TextColor="Gray">Departure Time</Label>
+                                    <Label Grid.Row="0" Grid.Column="1" Text="Flight Number"/>
+                                    <Label Grid.Row="0" Grid.Column="2" Text="Desitnation"/>
+
+                                    <Label FontSize="Medium" Grid.Row="1" FontAttributes="Bold" Grid.Column="0" TextColor="Navy" Text="{Binding departure.SimpleTime}"></Label>
+                                    <Label FontSize="Medium" Grid.Row="1"  FontAttributes="Bold" Grid.Column="1"  TextColor="Navy" Text="{Binding flight.number}"/>
+                                    <Label FontSize="Medium" Grid.Row="1" FontAttributes="Bold"  Grid.Column="2"  TextColor="Navy" Text="{Binding arrival.City}"/>
+                                </Grid>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

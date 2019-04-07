@@ -10,9 +10,30 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="MockData\Airports.json" />
+    <None Remove="MockData\Cities.json" />
+    <None Remove="MockData\Timetables.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="MockData\Airports.json" />
+    <EmbeddedResource Include="MockData\Cities.json" />
+    <EmbeddedResource Include="MockData\Timetables.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
     <PackageReference Include="Xamarin.Forms" Version="4.0.0.304370-pre8" />
     <PackageReference Include="Xamarin.Forms.GoogleMaps" Version="3.0.4" />  
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\MapPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TimetablePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

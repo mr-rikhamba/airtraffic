@@ -2,8 +2,23 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:views="clr-namespace:AirTraffic.Mobile.Views"
-            x:Class="AirTraffic.Mobile.Views.MainPage">
+            x:Class="AirTraffic.Mobile.Views.MainPage"
+                    xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+    android:TabbedPage.ToolbarPlacement="Bottom">
     <TabbedPage.Children>
+
+        
+        <NavigationPage Title="Map">
+            <NavigationPage.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="iOS" Value="tab_feed.png"/>
+                </OnPlatform>
+            </NavigationPage.Icon>
+            <x:Arguments>
+                <views:MapPage />
+            </x:Arguments>
+        </NavigationPage>
+        
         <NavigationPage Title="Browse">
             <NavigationPage.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">

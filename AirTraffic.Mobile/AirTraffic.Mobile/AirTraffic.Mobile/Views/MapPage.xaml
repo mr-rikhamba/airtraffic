@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
+             xmlns:vm="clr-namespace:AirTraffic.Mobile.ViewModels"
+             x:Class="AirTraffic.Mobile.Views.MapPage">
+    <ContentPage.BindingContext>
+        <vm:MapViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <RelativeLayout>
+            <Grid RowSpacing="0" ColumnSpacing="0" BackgroundColor="Red" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"        
+                  RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                Property=Width,
+                                Factor=1}"
+     RelativeLayout.HeightConstraint=
+         "{ConstraintExpression Type=RelativeToParent,
+                                Property=Height,
+                                Factor=1}">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+
+                <!-- Second row -->
+                <Grid Grid.Row="0" RowSpacing="0" ColumnSpacing="0"
+          BackgroundColor="Blue">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <maps:Map Grid.Row="0" x:Name="map"
+                      InitialCameraUpdate="-30.5595, 22.9375, 5, 30, 60"
+                      VerticalOptions="FillAndExpand" />
+
+                </Grid>
+
+            </Grid>
+
+            <StackLayout x:Name="FloatinWindow" IsVisible="{Binding ShowInfoWindow}" Padding="10" BackgroundColor="Transparent" 
+                            RelativeLayout.XConstraint = "{ConstraintExpression Type=RelativeToParent,
+                                                     Property=Width,
+                                                     Factor=0,
+                                                     Constant=0}"
+                            RelativeLayout.YConstraint = "{ConstraintExpression Type=RelativeToParent,
+                                                     Property=Height,
+                                                     Factor=0.5,Constant=60}"
+                            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                    Property=Width,
+                                    Factor=1}"
+                            RelativeLayout.HeightConstraint=
+                                                     "{ConstraintExpression Type=RelativeToParent,
+                                                                            Property=Height,
+                                                                            Factor=0.4}">
+                <Frame Padding="5" IsVisible="{Binding ShowInfoWindow}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+
+                    <Grid>
+                        <StackLayout Grid.Row="0"  Orientation="Horizontal">
+                            <Label>
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span FontAttributes="Bold" Text="{Binding SelectedPin.nameAirport}"></Span>
+                                        <Span Text="{Binding SelectedPin.codeIataAirport}"></Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+
+                        <StackLayout Grid.Row="1"  Orientation="Horizontal" >
+                            <Label>
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding SelectedPin.timezone}"></Span>
+                                        <Span>(</Span>
+                                        <Span Text="{Binding SelectedPin.GMT}"></Span>
+                                        <Span>)</Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+                        <StackLayout Grid.Row="2" Orientation="Horizontal" >
+                            <Label>
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding SelectedPin.phone}"></Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+                        <StackLayout Grid.Row="3" Orientation="Horizontal" >
+                            <Label>
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding SelectedPin.latitudeAirport}"></Span>
+                                        <Span Text="{Binding SelectedPin.longitudeAirport}"></Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+
+                        <StackLayout Grid.Row="4"  Orientation="Horizontal">
+                            <Button BackgroundColor="LightGreen" TextColor="Black" HorizontalOptions="EndAndExpand" Command="{Binding ViewFlightsCommand}" Text="View Flights"></Button>
+                            <Button HorizontalOptions="EndAndExpand" Command="{Binding ClowWindowCommand}" Text="Cancel"></Button>
+                        </StackLayout>
+                    </Grid>
+
+                </Frame>
+
+            </StackLayout>
+        </RelativeLayout>
+
+
+    </ContentPage.Content>
+</ContentPage>
